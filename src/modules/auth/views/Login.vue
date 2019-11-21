@@ -29,7 +29,7 @@
           </v-toolbar>
 
           <v-card-text>
-            <v-form>
+            <v-form @keyup.native.enter="submit">
               <v-text-field
                 v-if="!isLogin"
                 prepend-icon="person"

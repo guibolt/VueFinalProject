@@ -25,7 +25,7 @@
       >
         <v-card>
           <v-card-text>
-            <v-form>
+            <v-form @keyup.native.enter="submit">
 
               <v-dialog
                 ref="dateDialog"
@@ -348,13 +348,16 @@ export default {
       this.setTitle({ title })
     },
     async submit () {
-      try {
-        const record = await RecordsService.createRecord(this.record)
-        console.log('Record: ', record)
-        this.$router.push('/dashboard/records')
-      } catch (e) {
-        console.log('Error creating Record: ', e)
+      if (!this.$v.$invalid) {
+        try {
+          const record = await RecordsService.createRecord(this.record)
+          console.log('Record: ', record)
+          this.$router.push('/dashboard/records')
+        } catch (e) {
+          console.log('Error creating Record: ', e)
+        }
       }
+
     }
   }
 }
